@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from app.redis_utils import set_key, get_key
+from app.redis_utils import set_key, get_key, delete_key
 
 app = FastAPI()
 
@@ -14,3 +14,8 @@ def get_value(key: str):
     if value is None:
         raise HTTPException(status_code=404, detail="Key not found")
     return {"key": key, "value": value}
+
+@app.post("/delete")
+def delete_value(key: str ):
+    delete_key(key)
+    return {"status": "deleted","key": key}

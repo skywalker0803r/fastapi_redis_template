@@ -9,3 +9,6 @@ def set_key(key: str, value: str):
 
 def get_key(key: str) -> str:
     return redis_client.get(key)
+
+def delete_key(key: str) -> bool:
+    return redis_client.delete(key) > 0
